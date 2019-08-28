@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
 import configureStore, {history} from './store/index';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch,Router } from 'react-router-dom';
+import { BrowserRouter, Route, Switch,Router,withRouter,Redirect } from 'react-router-dom';
 import './index.scss';
 import App from './components/app';
 import { ScrollContext } from 'react-router-scroll-4';
@@ -59,6 +59,7 @@ import Login from './components/auth/login';
 
 const store = configureStore();
 class Root extends Component {
+
     render() {
         return (
             <BrowserRouter basename={'/'}>
@@ -127,10 +128,11 @@ class Root extends Component {
     }
 }
 
+
 ReactDOM.render(
     <Provider store={store}>
     <ConnectedRouter history={history}>
-    <Root />
+      <Root/>
     </ConnectedRouter>
     </Provider>
     ,

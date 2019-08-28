@@ -4,15 +4,18 @@ import {
 } from "../constants/ActionTypes";
 
 const INIT_STATE =  {
-    authUser: localStorage.getItem('token')
+    authUser: localStorage.getItem('token'),
+    admin_name:'',
 }
 
 
 export default (state = INIT_STATE, action) =>{
     switch(action.type){
-        case SIGNIN_USER:{
+        case SIGNIN_SUCCESS:{
            return {
-
+             ...state,
+             authUser: action.payload,
+             admin_name:action.adminName
            }
         }
         default:

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import LoginTabset from './loginTabset';
 import { ArrowLeft } from 'react-feather';
 // import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import Slider from 'react-slick';
 import stats from '../../assets/images/dashboard/stats.png';
@@ -12,6 +13,16 @@ import{
 } from '../../actions/Auth';
 
 export class Login extends Component {
+    componentDidMount(){
+        if(JSON.parse(localStorage.getItem('token'))){
+            this.props.history.push(`${process.env.PUBLIC_URL}/paylixclub/product/category`)
+        }
+    }
+    componentDidUpdate(){
+        if(JSON.parse(localStorage.getItem('token'))){
+            this.props.history.push(`${process.env.PUBLIC_URL}/paylixclub/product/category`)
+        }
+    }
     render() {
         var settings = {
             dots: true,
@@ -70,10 +81,10 @@ export class Login extends Component {
 }
 
 const mapStateToProps = ({auth}) =>{
-    const {loader,alertMessage, showMessage, authUser} = auth
-    return {loader,alertMessage,showMessage, authUser}
+    const {authUser} = auth
+    return {authUser}
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
     SignIn
-})(Login);
+})(Login));
